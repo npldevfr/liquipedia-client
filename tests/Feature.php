@@ -1,6 +1,6 @@
 <?php
 
-use NunoMaduro\SkeletonPhp\Example;
+use KCNetwork\Liquipedia\Example;
 
 it('foo', function () {
     $example = new Example();
