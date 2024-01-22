@@ -3,9 +3,11 @@
 <br />
 <p align="center">
 
-![Fancy logo](./docs/images/dark.png#gh-dark-mode-only)
-![Fancy logo](./docs/images/light.png#gh-light-mode-only)
 
+![Fancy logo](./docs/images/light.png#gh-dark-mode-only)
+![Fancy logo](./docs/images/dark.png#gh-light-mode-only)
+
+</p>
 <h3 align="center">
 Liquipedia PHP Client
 </h3>
