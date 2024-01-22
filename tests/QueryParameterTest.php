@@ -7,4 +7,3 @@ it('it can be instantiated', function () {
 
     expect($queryParameter)->toBeInstanceOf(QueryParameter::class);
 });
-

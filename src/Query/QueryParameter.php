@@ -4,15 +4,16 @@ namespace KCNetwork\Liquipedia\Query;
 
 use stdClass;
 
-class QueryParameter implements QueryParametersInterface
+final readonly class QueryParameter implements QueryParametersInterface
 {
     private stdClass $params;
 
     public function __construct(array $params = [])
     {
-        $this->params = (object) $params;
+        $this->params = new stdClass();
 
-        foreach ($this->params as $key => $value) {
+        foreach ($params as $key => $value) {
+            $this->params->{$key} = $value;
             $this->generateMethod($key);
         }
     }
