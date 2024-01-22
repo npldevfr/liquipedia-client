@@ -2,7 +2,10 @@
 
 <br />
 <p align="center">
- <img src="https://i.ibb.co/C5ghdHG/Frame.png" />
+
+![Fancy logo](./docs/images/dark.png#gh-dark-mode-only)
+![Fancy logo](./docs/images/light.png#gh-light-mode-only)
+
 <h3 align="center">
 Liquipedia PHP Client
 </h3>
