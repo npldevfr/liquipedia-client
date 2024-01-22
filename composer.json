@@ -1,12 +1,12 @@
 {
-    "name": "nunomaduro/skeleton-php",
-    "description": "A skeleton repository for my packages",
-    "keywords": ["php", "skeleton", "package"],
+    "name": "kcnetwork/liquipedia-api-client",
+    "description": "A PHP client for the Liquipedia v3 API",
+    "keywords": ["php", "liquipedia", "mediawiki", "api", "client"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Nuno Maduro",
-            "email": "enunomaduro@gmail.com"
+            "name": "npldev",
+            "email": "nplvdev@kcn.gg"
         }
     ],
     "require": {
@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NunoMaduro\\SkeletonPhp\\": "src/"
+            "KCNetwork\\Liquipedia\\": "src/"
         }
     },
     "autoload-dev": {
