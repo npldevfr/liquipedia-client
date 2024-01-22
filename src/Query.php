@@ -19,8 +19,7 @@ class Query extends QueryBuilder
     public function __construct(
         array $params = [],
         ?Client $client = null
-    )
-    {
+    ) {
         parent::__construct(
             array_merge([
                 'wiki' => '',
