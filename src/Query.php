@@ -7,11 +7,11 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use KCNetwork\Liquipedia\Query\QueryBuilder;
 
-class Query extends QueryBuilder
+final class Query extends QueryBuilder
 {
-    protected Client $client;
+    private readonly Client $client;
 
-    protected string $endpoint;
+    private string $endpoint;
 
     /**
      * @param  array<string, mixed>  $params
@@ -68,7 +68,7 @@ class Query extends QueryBuilder
             str_replace(
                 $wiki,
                 '',
-                $this->params['wiki']
+                (string) $this->params['wiki']
             )
         );
 
