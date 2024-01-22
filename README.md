@@ -11,7 +11,7 @@ An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a>
 <p>
 
 <p align="center">
-<a href="https://github.com/npldevfr/liquipedia-php-client" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/npldevfr/liquipedia-php-client?flat&colorA=002438&colorB=41c399"></a>
+<a href="https://github.com/npldevfr/liquipedia-client" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/npldevfr/liquipedia-client?flat&colorA=002438&colorB=41c399"></a>
 </p>
 
 
@@ -19,7 +19,7 @@ An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a>
 Supports PHP >= 8.2
 
 ```bash
-composer require npldevfr/liquipedia-php-client
+composer require npldevfr/liquipedia-client
 ```
 
 ## 🚀 Usage

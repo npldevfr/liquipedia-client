@@ -1,5 +1,5 @@
 {
-    "name": "npldevfr/liquipedia-php-client",
+    "name": "npldevfr/liquipedia-client",
     "description": "A PHP client for the Liquipedia v3 API",
     "keywords": ["php", "liquipedia", "mediawiki", "api", "client"],
     "license": "MIT",
