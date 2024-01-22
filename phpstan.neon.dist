@@ -4,3 +4,5 @@ parameters:
         - src
 
     reportUnmatchedIgnoredErrors: true
+    universalObjectCratesClasses:
+       - Npldevfr\Liquipedia\Query\QueryParameter

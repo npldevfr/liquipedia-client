@@ -28,22 +28,12 @@ interface QueryParametersInterface
     public function __toString(): string;
 
     /**
-     * Returns the value of the parameter
-     */
-    public function __get(string $name): mixed;
-
-    /**
-     * Sets the value of the parameter
+     * Sets the parameter
      */
     public function __set(string $name, mixed $value): void;
 
     /**
-     * Checks if the parameter is set
+     * Gets the parameter
      */
-    public function __isset(string $name): bool;
-
-    /**
-     * Unsets the parameter
-     */
-    public function __unset(string $name): void;
+    public function __get(string $name): mixed;
 }
