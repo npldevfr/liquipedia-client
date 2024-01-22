@@ -14,16 +14,20 @@ class Query extends QueryBuilder
     protected string $endpoint;
 
     /**
-     * @param array<string, mixed> $params
-     * @param Client|null $client
+     * @param  array<string, mixed>  $params
      */
-    public function __construct(array $params = [], ?Client $client = null)
+    public function __construct(
+        array $params = [],
+        ?Client $client = null
+    )
     {
-        parent::__construct(array_merge([
-            'wiki' => '',
-            'limit' => 100,
-            'conditions' => '',
-        ], $params));
+        parent::__construct(
+            array_merge([
+                'wiki' => '',
+                'limit' => 100,
+                'conditions' => '',
+            ], $params)
+        );
 
         $this->client = $client ?? new Client([
             'base_uri' => 'https://api.liquipedia.net/api/',
@@ -31,7 +35,7 @@ class Query extends QueryBuilder
     }
 
     /**
-     * @param array<string> $wikis
+     * @param  array<string>  $wikis
      */
     public function wikis(array $wikis): self
     {
@@ -44,6 +48,9 @@ class Query extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function addWiki(string $wiki): self
     {
         $this->params['wiki'] .= '|'.$wiki;
@@ -51,6 +58,9 @@ class Query extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function removeWiki(string $wiki): self
     {
         $this->params['wiki'] = preg_replace(
@@ -66,6 +76,9 @@ class Query extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function limit(int $limit): self
     {
         $this->params['limit'] = $limit;
@@ -73,6 +86,9 @@ class Query extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function rawConditions(string $conditions): self
     {
         $this->params['conditions'] = trim($this->params['conditions'].' '.$conditions);
@@ -81,6 +97,8 @@ class Query extends QueryBuilder
     }
 
     /**
+     * @return $this
+     *
      * @throws Exception
      */
     public function andCondition(string $key, string $operator, string $value): self
@@ -96,7 +114,10 @@ class Query extends QueryBuilder
     }
 
     /**
-     * @param array<string> $values
+     * @param  array<string>  $values
+     * @return $this
+     *
+     * @throws Exception
      */
     public function andConditions(string $key, string $operator, array $values): self
     {
@@ -115,6 +136,11 @@ class Query extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     *
+     * @throws Exception
+     */
     public function orCondition(string $key, string $operator, string $value): self
     {
         // operator are : :: (equals), ::! (not equals), ::< (lower than) or ::> (greater than).
@@ -127,6 +153,12 @@ class Query extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @param  array<string>  $values
+     * @return $this
+     *
+     * @throws Exception
+     */
     public function orConditions(string $key, string $operator, array $values): self
     {
         // operator are : :: (equals), ::! (not equals), ::< (lower than) or ::> (greater than).
@@ -207,7 +239,6 @@ class Query extends QueryBuilder
     {
 
         $customEndpoint = $endpoint ?? $this->endpoint;
-
         $response = json_decode($this->client->get($customEndpoint, [
             'query' => $this->params,
         ])->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
