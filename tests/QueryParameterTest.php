@@ -1,6 +1,6 @@
 <?php
 
-use KCNetwork\Liquipedia\Query\QueryParameter;
+use Npldevfr\Liquipedia\Query\QueryParameter;
 
 it('it can be instantiated', function () {
     $queryParameter = new QueryParameter();

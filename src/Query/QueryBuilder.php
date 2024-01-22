@@ -1,6 +1,6 @@
 <?php
 
-namespace KCNetwork\Liquipedia\Query;
+namespace Npldevfr\Liquipedia\Query;
 
 abstract class QueryBuilder implements QueryBuilderInterface
 {

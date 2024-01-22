@@ -1,12 +1,12 @@
 <?php
 
 //
-//namespace KCNetwork\Liquipedia;
+//namespace Npldevfr\Liquipedia;
 //
 //use Exception;
 //use GuzzleHttp\Client;
 //use GuzzleHttp\Exception\GuzzleException;
-//use KCNetwork\Liquipedia\Query\QueryBuilder;
+//use Npldevfr\Liquipedia\Query\QueryBuilder;
 //
 //final class Query extends QueryBuilder
 //{

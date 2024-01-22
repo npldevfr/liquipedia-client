@@ -1,6 +1,6 @@
 <?php
 
-use KCNetwork\Liquipedia\Query\QueryBuilder;
+use Npldevfr\Liquipedia\Query\QueryBuilder;
 
 it('can be instantiated', function () {
     $queryBuilder = new class extends QueryBuilder

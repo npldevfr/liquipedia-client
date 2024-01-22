@@ -1,6 +1,6 @@
 <?php
 
-namespace KCNetwork\Liquipedia\Endpoints;
+namespace Npldevfr\Liquipedia\Endpoints;
 
 enum Endpoints: string
 {

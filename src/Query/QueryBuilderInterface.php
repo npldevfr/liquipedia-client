@@ -1,6 +1,6 @@
 <?php
 
-namespace KCNetwork\Liquipedia\Query;
+namespace Npldevfr\Liquipedia\Query;
 
 interface QueryBuilderInterface
 {

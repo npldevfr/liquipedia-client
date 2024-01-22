@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "KCNetwork\\Liquipedia\\": "src/"
+            "Npldevfr\\Liquipedia\\": "src/"
         }
     },
     "autoload-dev": {
