@@ -12,6 +12,16 @@ final class QueryParameters implements QueryParametersInterface
 
     public int $offset;
 
+    public string $query;
+
+    public string $conditions;
+
+    public string $order;
+
+    public int $pagination;
+
+    public string $groupby;
+
     public function __construct(array $params = [])
     {
         foreach ($params as $key => $value) {

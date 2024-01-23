@@ -4,7 +4,8 @@ namespace Npldevfr\Liquipedia;
 
 use Exception;
 use GuzzleHttp\Client;
-use Npldevfr\Liquipedia\Endpoints\Endpoints;
+use Npldevfr\Liquipedia\Meta\Endpoints;
+use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
 
@@ -69,9 +70,15 @@ final class LiquipediaBuilder extends QueryBuilder
      * Set a result limit.
      *
      * @return $this
+     *
+     * @throws Exception
      */
     public function limit(int $limit): self
     {
+        if ($limit > 9999) {
+            throw new Exception('[LiquipediaBuilder] Limit cannot be greater than 9999.');
+        }
+
         $this->queryParameters->limit = $limit;
 
         return $this;
@@ -98,10 +105,79 @@ final class LiquipediaBuilder extends QueryBuilder
      */
     public function endpoint(string $endpoint): self
     {
-        if (! Endpoints::fromArray($endpoint)) {
+        if (! Endpoints::fromValue($endpoint)) {
             throw new Exception('[LiquipediaBuilder] Endpoint '.$endpoint.' is not valid.');
         }
         $this->endpoint = $endpoint;
+
+        return $this;
+    }
+
+    /**
+     * The datapoints you want to query.
+     *
+     * @param  array<string> |string  $fields
+     * @return $this
+     */
+    public function select(array|string $fields): self
+    {
+        $fields = is_string($fields) ? explode(',', str_replace(' ', '', $fields)) : $fields;
+
+        $existingFields = $this->queryParameters->query ?? '';
+        $newFields = array_unique(array_filter($fields));
+
+        $allFields = array_merge(explode(',', $existingFields), $newFields);
+        $this->queryParameters->query = implode(',', array_unique(array_filter($allFields)));
+
+        return $this;
+    }
+
+    /**
+     * Set the pagination of the results.
+     *
+     * @return $this
+     */
+    public function pagination(int|string $pagination): self
+    {
+        $this->queryParameters->pagination = (int) $pagination;
+
+        return $this;
+    }
+
+    /**
+     * Order by a field.
+     *
+     * @throws Exception
+     */
+    public function orderBy(string $field, string $direction = 'ASC'): self
+    {
+
+        $direction = strtoupper($direction);
+
+        if (! SortOrder::fromValue($direction)) {
+            throw new Exception('[LiquipediaBuilder] Direction '.$direction.' is not valid.');
+        }
+
+        $this->queryParameters->order = "{$field} ".$direction;
+
+        return $this;
+    }
+
+    /**
+     * Group by a field.
+     *
+     * @throws Exception
+     */
+    public function groupBy(string $field, string $direction = 'ASC'): self
+    {
+
+        $direction = strtoupper($direction);
+
+        if (! SortOrder::fromValue($direction)) {
+            throw new Exception('[LiquipediaBuilder] Direction '.$direction.' is not valid.');
+        }
+
+        $this->queryParameters->groupby = "{$field} ".$direction;
 
         return $this;
     }

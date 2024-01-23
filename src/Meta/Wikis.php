@@ -1,9 +1,13 @@
 <?php
 
-namespace Npldevfr\Liquipedia\Wikis;
+namespace Npldevfr\Liquipedia\Meta;
+
+use Npldevfr\Liquipedia\Traits\HasConstants;
 
 final class Wikis
 {
+    use HasConstants;
+
     final public const AGE_OF_EMPIRES = 'ageofempires';
 
     final public const APEX_LEGENDS = 'apexlegends';
