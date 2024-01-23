@@ -2,9 +2,10 @@
 
 <br />
 
+<p align="center">
 
-![Fancy logo](./docs/images/dark.png#gh-dark-mode-only)
-![Fancy logo](./docs/images/light.png#gh-light-mode-only)
+<img src="./docs/images/dark.png#gh-dark-mode-only" width="65" />
+<img src="./docs/images/light.png#gh-light-mode-only" width="65" />
 
 <h3>
 Liquipedia PHP Client
@@ -15,6 +16,8 @@ An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a>
 
 <p>
 <a href="https://github.com/npldevfr/liquipedia-client" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/npldevfr/liquipedia-client?flat&colorA=002438&colorB=41c399"></a>
+</p>
+
 </p>
 
 ## ✨ Features
