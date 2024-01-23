@@ -18,9 +18,13 @@ final class QueryParameters implements QueryParametersInterface
 
     public string $order;
 
+    public string $template;
+
     public int $pagination;
 
     public string $groupby;
+
+    public string $date;
 
     public function __construct(array $params = [])
     {

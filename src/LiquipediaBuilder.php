@@ -183,6 +183,37 @@ final class LiquipediaBuilder extends QueryBuilder
     }
 
     /**
+     * Set the date you want to query.
+     *
+     * @return $this
+     *
+     * @throws Exception
+     */
+    public function date(string $date): self
+    {
+
+        if (! preg_match('/\d{4}-\d{2}-\d{2}/', $date) || preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $date)) {
+            throw new Exception('[LiquipediaBuilder] Date '.$date.' is not valid.');
+        }
+
+        $this->queryParameters->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Set the template you want to query.
+     *
+     * @return $this
+     */
+    public function template(string $template): self
+    {
+        $this->queryParameters->template = $template;
+
+        return $this;
+    }
+
+    /**
      * Get the endpoint you want to query.
      */
     public function getEndpoint(): string

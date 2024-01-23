@@ -309,3 +309,38 @@ it('can group by a field with a string and an array with duplicates', function (
         'groupby' => 'field2 ASC',
     ]);
 });
+
+it('can set template', function () {
+    $builder = LiquipediaBuilder::query()
+        ->template('template1');
+
+    expect($builder->build())->toBe([
+        'template' => 'template1',
+    ]);
+});
+
+it('can add date', function () {
+    $builder = LiquipediaBuilder::query()
+        ->date('2020-01-01');
+
+    expect($builder->build())->toBe([
+        'date' => '2020-01-01',
+    ]);
+});
+
+it('cannot add date with wrong format', function () {
+    expect(
+        fn () => LiquipediaBuilder::query()
+            ->date('2020-01-01 00:00:00')
+    )->toThrow(Exception::class);
+});
+
+it('can add date with a string', function () {
+    $builder = LiquipediaBuilder::query()
+        ->date('2020-01-01')
+        ->date('2020-01-02');
+
+    expect($builder->build())->toBe([
+        'date' => '2020-01-02',
+    ]);
+});
