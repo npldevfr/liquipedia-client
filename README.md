@@ -30,30 +30,11 @@ composer require npldevfr/liquipedia-client
 // todo
 ```
 
-
-
-
-🧹 Keep a modern codebase with **Pint**:
+## 🛠️ Development
 ```bash
-composer lint
-```
+git clone https://github.com/npldevfr/liquipedia-client
+composer install
 
-✅ Run refactors using **Rector**
-```bash
-composer refacto
-```
-
-⚗️ Run static analysis using **PHPStan**:
-```bash
-composer test:types
-```
-
-✅ Run unit tests using **PEST**
-```bash
-composer test:unit
-```
-
-🚀 Run the entire test suite:
-```bash
 composer test
 ```
+

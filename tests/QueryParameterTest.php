@@ -1,15 +1,15 @@
 <?php
 
-use Npldevfr\Liquipedia\Query\QueryParameter;
+use Npldevfr\Liquipedia\Query\QueryParameters;
 
 it('it can be instantiated', function () {
-    $queryParameter = new QueryParameter();
+    $queryParameter = new QueryParameters();
 
-    expect($queryParameter)->toBeInstanceOf(QueryParameter::class);
+    expect($queryParameter)->toBeInstanceOf(QueryParameters::class);
 });
 
 it('it can get by magic method', function () {
-    $queryParameter = new QueryParameter([
+    $queryParameter = new QueryParameters([
         'limit' => 10,
     ]);
 
@@ -17,14 +17,14 @@ it('it can get by magic method', function () {
 });
 
 it('it can set by magic method', function () {
-    $queryParameter = new QueryParameter();
+    $queryParameter = new QueryParameters();
 
     $queryParameter->wiki = 'foo';
     expect($queryParameter->wiki)->toBe('foo');
 });
 
 it('it can be converted to array', function () {
-    $queryParameter = new QueryParameter([
+    $queryParameter = new QueryParameters([
         'wiki' => 'foo',
         'limit' => 10,
     ]);
@@ -38,7 +38,7 @@ it('it can be converted to array', function () {
 });
 
 it('it can be converted to string', function () {
-    $queryParameter = new QueryParameter([
+    $queryParameter = new QueryParameters([
         'wiki' => 'foo',
         'limit' => 10,
     ]);
@@ -47,7 +47,7 @@ it('it can be converted to string', function () {
 });
 
 it('it can be set', function () {
-    $queryParameter = new QueryParameter([
+    $queryParameter = new QueryParameters([
         'wiki' => 'foo',
         'limit' => 10,
     ]);

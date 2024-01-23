@@ -1,6 +1,6 @@
 <?php
 
-namespace Npldevfr\Liquipedia\Query;
+namespace Npldevfr\Liquipedia\Interfaces;
 
 use JsonException;
 

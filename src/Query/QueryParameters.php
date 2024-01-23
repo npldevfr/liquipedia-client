@@ -2,11 +2,12 @@
 
 namespace Npldevfr\Liquipedia\Query;
 
+use Npldevfr\Liquipedia\Interfaces\QueryParametersInterface;
 use stdClass;
 
-final class QueryParameter implements QueryParametersInterface
+final readonly class QueryParameters implements QueryParametersInterface
 {
-    private readonly stdClass $params;
+    private stdClass $params;
 
     public function __construct(array $params = [])
     {
