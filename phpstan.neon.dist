@@ -6,3 +6,4 @@ parameters:
     reportUnmatchedIgnoredErrors: true
     universalObjectCratesClasses:
        - Npldevfr\Liquipedia\Query\QueryParameter
+       - Npldevfr\Liquipedia\LiquipediaBuilder

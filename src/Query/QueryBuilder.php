@@ -7,27 +7,30 @@ use Npldevfr\Liquipedia\Interfaces\QueryBuilderInterface;
 
 abstract class QueryBuilder implements QueryBuilderInterface
 {
+    protected QueryParameters $queryParameters;
 
-    public QueryParameters $queryParameters;
     protected Client $client;
 
     public function __construct(
-        array            $params,
+        ?array $params = [],
         ?QueryParameters $queryParameters = null,
-        ?Client          $client = null
+        ?Client $client = null
     ) {
 
         // If params are passed, we use them to build the query parameters
-        if (count($params) > 0 && !$queryParameters)
+        if (isset($params) && $params !== []) {
             $this->queryParameters = new QueryParameters($params);
-
-        // We prioritize the query parameters passed over the params
-        elseif ($queryParameters)
-            $this->queryParameters = $queryParameters;
+        }
 
         // If no params are passed, we use the query parameters passed
-        else
+        else {
             $this->queryParameters = new QueryParameters();
+        }
+
+        // We prioritize the query parameters passed over the params
+        if ($queryParameters instanceof QueryParameters) {
+            $this->queryParameters = $queryParameters;
+        }
 
         $this->client = $client ?? new Client();
     }

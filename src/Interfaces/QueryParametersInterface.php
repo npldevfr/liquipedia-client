@@ -26,14 +26,4 @@ interface QueryParametersInterface
      * @throws JsonException
      */
     public function __toString(): string;
-
-    /**
-     * Sets the parameter
-     */
-    public function __set(string $name, mixed $value): void;
-
-    /**
-     * Gets the parameter
-     */
-    public function __get(string $name): mixed;
 }
