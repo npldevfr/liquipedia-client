@@ -4,8 +4,8 @@
 
 <p align="center">
 
-<img src="./docs/images/dark.png#gh-dark-mode-only" />
-<img src="./docs/images/light.png#gh-light-mode-only"  />
+<img src="./docs/images/dark.png#gh-dark-mode-only" width="180" />
+<img src="./docs/images/light.png#gh-light-mode-only" width="180"  />
 </p>
 <h3  align="center">
 Liquipedia PHP Client
