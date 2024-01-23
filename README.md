@@ -3,8 +3,8 @@
 <br />
 
 
-![Fancy logo](./docs/images/light.png#gh-dark-mode-only)
-![Fancy logo](./docs/images/dark.png#gh-light-mode-only)
+![Fancy logo](./docs/images/dark.png#gh-dark-mode-only)
+![Fancy logo](./docs/images/light.png#gh-light-mode-only)
 
 <h3>
 Liquipedia PHP Client

@@ -2,7 +2,7 @@
 
 namespace Npldevfr\Liquipedia\Query;
 
-use http\Client;
+use GuzzleHttp\Client;
 use Npldevfr\Liquipedia\Interfaces\QueryBuilderInterface;
 
 abstract class QueryBuilder implements QueryBuilderInterface
@@ -29,7 +29,7 @@ abstract class QueryBuilder implements QueryBuilderInterface
         else
             $this->queryParameters = new QueryParameters();
 
-        $this->client = $client ??
+        $this->client = $client ?? new Client();
     }
 
     public function build(): array
