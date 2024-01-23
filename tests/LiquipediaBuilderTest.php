@@ -1,5 +1,6 @@
 <?php
 
+use Npldevfr\Liquipedia\Endpoints\Endpoints;
 use Npldevfr\Liquipedia\LiquipediaBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
 use Npldevfr\Liquipedia\Wikis\Wikis;
@@ -139,4 +140,25 @@ it('can set a limit and an offset', function () {
         'limit' => 1,
         'offset' => 1,
     ]);
+});
+
+it('can set an endpoint', function () {
+    $builder = LiquipediaBuilder::query()
+        ->endpoint(Endpoints::MATCHES);
+
+    expect($builder->getEndpoint())->toBe(Endpoints::MATCHES);
+});
+
+it('can set an endpoint and a wiki', function () {
+    $builder = LiquipediaBuilder::query()
+        ->endpoint(Endpoints::MATCHES)
+        ->wikis(Wikis::LEAGUE_OF_LEGENDS);
+
+    expect($builder->build())
+        ->toBe([
+            'wiki' => 'leagueoflegends',
+        ])
+        ->and($builder->getEndpoint())
+        ->toBe(Endpoints::MATCHES);
+
 });

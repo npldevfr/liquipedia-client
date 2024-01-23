@@ -2,13 +2,15 @@
 
 namespace Npldevfr\Liquipedia;
 
+use Exception;
 use GuzzleHttp\Client;
+use Npldevfr\Liquipedia\Endpoints\Endpoints;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
 
 final class LiquipediaBuilder extends QueryBuilder
 {
-    //    private string $endpoint;
+    private string $endpoint;
 
     public function __construct(
         ?array $params = [],
@@ -85,6 +87,31 @@ final class LiquipediaBuilder extends QueryBuilder
         $this->queryParameters->offset = $offset;
 
         return $this;
+    }
+
+    /**
+     * Set the endpoint you want to query.
+     *
+     * @return $this
+     *
+     * @throws Exception
+     */
+    public function endpoint(string $endpoint): self
+    {
+        if (! Endpoints::fromArray($endpoint)) {
+            throw new Exception('[LiquipediaBuilder] Endpoint '.$endpoint.' is not valid.');
+        }
+        $this->endpoint = $endpoint;
+
+        return $this;
+    }
+
+    /**
+     * Get the endpoint you want to query.
+     */
+    public function getEndpoint(): string
+    {
+        return $this->endpoint;
     }
 
     /**

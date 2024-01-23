@@ -2,22 +2,72 @@
 
 namespace Npldevfr\Liquipedia\Endpoints;
 
-enum Endpoints: string
+final class Endpoints
 {
-    case BROADCASTERS = '/v3/broadcasters';
-    case COMPANIES = '/v3/company';
-    case DATAPOINTS = '/v3/datapoint';
-    case EXTERNAL_MEDIA_LINKS = '/v3/externalmedialink';
-    case MATCHES = '/v3/match';
-    case PLACEMENTS = '/v3/placement';
-    case PLAYERS = '/v3/player';
-    case SERIES = '/v3/series';
-    case SQUAD_PLAYERS = '/v3/squadplayer';
-    case STANDINGS_ENTRY = '/v3/standingsentry';
-    case STANDINGS_TABLE = '/v3/standingstable';
-    case TEAMS = '/v3/team';
-    case TOURNAMENTS = '/v3/tournament';
-    case TRANSFERS = '/v3/transfer';
-    case TEAM_TEMPLATES = '/v3/teamtemplate';
-    case TEAM_TEMPLATE_LIST = '/v3/teamtemplatelist';
+    final public const BROADCASTERS = 'broadcasters';
+
+    final public const COMPANIES = 'company';
+
+    final public const DATAPOINTS = 'datapoint';
+
+    final public const EXTERNAL_MEDIA_LINKS = 'externalmedialink';
+
+    final public const MATCHES = 'match';
+
+    final public const PLACEMENTS = 'placement';
+
+    final public const PLAYERS = 'player';
+
+    final public const SERIES = 'series';
+
+    final public const SQUAD_PLAYERS = 'squadplayer';
+
+    final public const STANDINGS_ENTRY = 'standingsentry';
+
+    final public const STANDINGS_TABLE = 'standingstable';
+
+    final public const TEAMS = 'team';
+
+    final public const TOURNAMENTS = 'tournament';
+
+    final public const TRANSFERS = 'transfer';
+
+    final public const TEAM_TEMPLATES = 'teamtemplate';
+
+    final public const TEAM_TEMPLATE_LIST = 'teamtemplatelist';
+
+    /**
+     * Check if the endpoint is valid.
+     */
+    public static function fromArray(string $endpoint): bool
+    {
+        return in_array($endpoint, self::all());
+    }
+
+    /**
+     * Get all the endpoints.
+     *
+     * @return string[]
+     */
+    public static function all(): array
+    {
+        return [
+            self::BROADCASTERS,
+            self::COMPANIES,
+            self::DATAPOINTS,
+            self::EXTERNAL_MEDIA_LINKS,
+            self::MATCHES,
+            self::PLACEMENTS,
+            self::PLAYERS,
+            self::SERIES,
+            self::SQUAD_PLAYERS,
+            self::STANDINGS_ENTRY,
+            self::STANDINGS_TABLE,
+            self::TEAMS,
+            self::TOURNAMENTS,
+            self::TRANSFERS,
+            self::TEAM_TEMPLATES,
+            self::TEAM_TEMPLATE_LIST,
+        ];
+    }
 }
