@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if a version number is provided as an argument
+if [ $# -eq 0 ]; then
+    echo "Error: Please provide a version number as an argument."
+    exit 1
+fi
+
 # Get the current version from your composer.json
 currentVersion=$(jq -r .version composer.json)
 
@@ -20,8 +26,12 @@ incrementVersion() {
     fi
 }
 
-# Calculate the new version
-newVersion=$(incrementVersion "$currentVersion")
+# Use the provided version or increment the current version
+if [[ $1 =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    newVersion=$1
+else
+    newVersion=$(incrementVersion "$currentVersion")
+fi
 
 # Display the new version
 echo "Creating a new release for $(jq -r .name composer.json)..."
