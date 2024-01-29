@@ -344,3 +344,52 @@ it('can add date with a string', function () {
         'date' => '2020-01-02',
     ]);
 });
+
+it('can set raw conditions', function () {
+    $builder = LiquipediaBuilder::query()
+        ->rawConditions('[[pagename::value]]');
+
+    expect($builder->build())->toBe([
+        'conditions' => '[[pagename::value]]',
+    ]);
+});
+
+it('cannot set 2 raw conditions', function () {
+    expect(
+        fn () => LiquipediaBuilder::query()
+            ->rawConditions('[[pagename::value]]')
+            ->rawConditions('[[pagename::value]]')
+    )->toThrow(Exception::class);
+});
+
+it('can build a complex query', function ($wiki) {
+    $builder = LiquipediaBuilder::query()
+        ->wikis($wiki)
+        ->endpoint(Endpoints::MATCHES)
+        ->limit(1)
+        ->offset(1)
+        ->select([
+            'field1',
+            'field2',
+        ])
+        ->pagination(1)
+        ->orderBy('field1', SortOrder::ASC)
+        ->groupBy('field1', SortOrder::DESC)
+        ->date('2020-01-01')
+        ->rawConditions('[[pagename::value]]');
+
+    expect($builder->build())->toBe([
+        'wiki' => $wiki,
+        'limit' => 1,
+        'offset' => 1,
+        'query' => 'field1,field2',
+        'conditions' => '[[pagename::value]]',
+        'order' => 'field1 ASC',
+        'pagination' => 1,
+        'groupby' => 'field1 DESC',
+        'date' => '2020-01-01',
+    ]);
+})->with([
+    Wikis::LEAGUE_OF_LEGENDS,
+    Wikis::OVERWATCH,
+]);

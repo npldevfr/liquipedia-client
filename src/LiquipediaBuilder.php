@@ -4,6 +4,7 @@ namespace Npldevfr\Liquipedia;
 
 use Exception;
 use GuzzleHttp\Client;
+use Npldevfr\Liquipedia\Meta\Conditions;
 use Npldevfr\Liquipedia\Meta\Endpoints;
 use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
@@ -13,6 +14,8 @@ final class LiquipediaBuilder extends QueryBuilder
 {
     private string $endpoint;
 
+    private bool $hasRawConditions = false;
+
     public function __construct(
         ?array $params = [],
         ?QueryParameters $queryParameters = null,
@@ -20,7 +23,7 @@ final class LiquipediaBuilder extends QueryBuilder
     ) {
 
         parent::__construct($params, $queryParameters, $client ?? new Client([
-            'base_uri' => 'https://api.liquipedia.net/api/',
+            'base_uri' => 'https://api.liquipedia.net/api/v3',
         ]));
     }
 
@@ -214,6 +217,26 @@ final class LiquipediaBuilder extends QueryBuilder
     }
 
     /**
+     * Set the conditions you want to query without any formatting.
+     * It will
+     *
+     * @return $this
+     *
+     * @throws Exception
+     */
+    public function rawConditions(string $conditions): self
+    {
+        if ($this->hasRawConditions) {
+            throw new Exception('[LiquipediaBuilder] You can only set one raw condition.');
+        }
+
+        $this->hasRawConditions = true;
+        $this->queryParameters->conditions = $conditions;
+
+        return $this;
+    }
+
+    /**
      * Get the endpoint you want to query.
      */
     public function getEndpoint(): string
@@ -237,45 +260,6 @@ final class LiquipediaBuilder extends QueryBuilder
         );
     }
 
-    //
-    //    /**
-    //     * @return $this
-    //     */
-    //    public function addWiki(string $wiki): self
-    //    {
-    //        $this->params['wiki'] .= '|'.$wiki;
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @return $this
-    //     */
-    //    public function removeWiki(string $wiki): self
-    //    {
-    //        $this->params['wiki'] = preg_replace(
-    //            '/\|+/',
-    //            '|',
-    //            str_replace(
-    //                $wiki,
-    //                '',
-    //                (string) $this->params['wiki']
-    //            )
-    //        );
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @return $this
-    //     */
-    //    public function limit(int $limit): self
-    //    {
-    //        $this->params['limit'] = $limit;
-    //
-    //        return $this;
-    //    }
-    //
     //    /**
     //     * @return $this
     //     */
@@ -367,64 +351,6 @@ final class LiquipediaBuilder extends QueryBuilder
     //        return $this;
     //    }
     //
-    //    public function select(array $fields): self
-    //    {
-    //        if (! isset($this->params['query'])) {
-    //            $this->params['query'] = implode(',', $fields);
-    //        } else {
-    //            $this->params['query'] .= ','.implode(',', $fields);
-    //        }
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * What you want your results grouped by (this can be helpful when using aggregate functions).
-    //     * Example: pagename ASC
-    //     *
-    //     * @throws Exception
-    //     */
-    //    public function groupBy(string $field, string $direction = 'ASC'): self
-    //    {
-    //
-    //        if (! in_array(strtoupper($direction), ['ASC', 'DESC'])) {
-    //            throw new Exception('Direction must be ASC or DESC');
-    //        }
-    //
-    //        $this->params['groupby'] = "{$field} {$direction}";
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * The order you want your result in.
-    //     * Example: pagename ASC
-    //     *
-    //     * @throws Exception
-    //     */
-    //    public function orderBy(string $field, string $direction = 'ASC'): self
-    //    {
-    //
-    //        if (! in_array(strtoupper($direction), ['ASC', 'DESC'])) {
-    //            throw new Exception('Direction must be ASC or DESC');
-    //        }
-    //
-    //        $this->params['order'] = "{$field} {$direction}";
-    //
-    //        return $this;
-    //    }
-    //
-    //    public function setEndpoint(string $endpoint): self
-    //    {
-    //        $this->endpoint = $endpoint;
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @throws GuzzleException
-    //     * @throws Exception
-    //     */
     //    public function get(?string $endpoint = null): array
     //    {
     //
