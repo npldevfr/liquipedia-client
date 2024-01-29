@@ -4,8 +4,8 @@ namespace Npldevfr\Liquipedia;
 
 use Exception;
 use GuzzleHttp\Client;
-use Npldevfr\Liquipedia\Meta\Conditions;
-use Npldevfr\Liquipedia\Meta\Endpoints;
+use Npldevfr\Liquipedia\Meta\Endpoint;
+use Npldevfr\Liquipedia\Meta\Operator;
 use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
@@ -108,7 +108,7 @@ final class LiquipediaBuilder extends QueryBuilder
      */
     public function endpoint(string $endpoint): self
     {
-        if (! Endpoints::fromValue($endpoint)) {
+        if (! Endpoint::fromValue($endpoint)) {
             throw new Exception('[LiquipediaBuilder] Endpoint '.$endpoint.' is not valid.');
         }
         $this->endpoint = $endpoint;

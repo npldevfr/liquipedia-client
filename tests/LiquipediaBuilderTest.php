@@ -1,14 +1,14 @@
 <?php
 
 use Npldevfr\Liquipedia\LiquipediaBuilder;
-use Npldevfr\Liquipedia\Meta\Endpoints;
+use Npldevfr\Liquipedia\Meta\Endpoint;
 use Npldevfr\Liquipedia\Meta\SortOrder;
-use Npldevfr\Liquipedia\Meta\Wikis;
+use Npldevfr\Liquipedia\Meta\Wiki;
 use Npldevfr\Liquipedia\Query\QueryParameters;
 
 it('can build with wiki', function () {
     $builder = LiquipediaBuilder::query([
-        'wiki' => Wikis::LEAGUE_OF_LEGENDS,
+        'wiki' => Wiki::LEAGUE_OF_LEGENDS,
     ]);
 
     expect($builder->build())->toBe([
@@ -19,7 +19,7 @@ it('can build with wiki', function () {
 
 it('can build a query with a query parameter object', function () {
     $builder = LiquipediaBuilder::query([], new QueryParameters([
-        'wiki' => Wikis::LEAGUE_OF_LEGENDS,
+        'wiki' => Wiki::LEAGUE_OF_LEGENDS,
     ]));
 
     expect($builder->build())->toBe([
@@ -29,7 +29,7 @@ it('can build a query with a query parameter object', function () {
 
 it('can build a query with a query parameter object and params', function () {
     $builder = LiquipediaBuilder::query([
-        'wiki' => Wikis::LEAGUE_OF_LEGENDS,
+        'wiki' => Wiki::LEAGUE_OF_LEGENDS,
     ], new QueryParameters([
         'limit' => 1,
     ]));
@@ -40,7 +40,7 @@ it('can build a query with a query parameter object and params', function () {
 });
 
 it('can set one wiki', function () {
-    $builder = LiquipediaBuilder::query()->wikis(Wikis::LEAGUE_OF_LEGENDS);
+    $builder = LiquipediaBuilder::query()->wikis(Wiki::LEAGUE_OF_LEGENDS);
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends',
@@ -50,8 +50,8 @@ it('can set one wiki', function () {
 it('can set multiple wikis', function () {
     $builder = LiquipediaBuilder::query()
         ->wikis([
-            Wikis::LEAGUE_OF_LEGENDS,
-            Wikis::OVERWATCH,
+            Wiki::LEAGUE_OF_LEGENDS,
+            Wiki::OVERWATCH,
         ]);
 
     expect($builder->build())->toBe([
@@ -62,8 +62,8 @@ it('can set multiple wikis', function () {
 it('can set multiple wikis with duplicates', function () {
     $builder = LiquipediaBuilder::query()
         ->wikis([
-            Wikis::LEAGUE_OF_LEGENDS,
-            Wikis::LEAGUE_OF_LEGENDS,
+            Wiki::LEAGUE_OF_LEGENDS,
+            Wiki::LEAGUE_OF_LEGENDS,
         ]);
 
     expect($builder->build())->toBe([
@@ -74,7 +74,7 @@ it('can set multiple wikis with duplicates', function () {
 it('can set multiple wikis with duplicates and a string', function () {
     $builder = LiquipediaBuilder::query()
         ->wikis([
-            Wikis::LEAGUE_OF_LEGENDS,
+            Wiki::LEAGUE_OF_LEGENDS,
             'overwatch',
         ]);
 
@@ -85,8 +85,8 @@ it('can set multiple wikis with duplicates and a string', function () {
 
 it('can add a wiki', function () {
     $builder = LiquipediaBuilder::query()
-        ->wikis(Wikis::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wikis::OVERWATCH);
+        ->wikis(Wiki::LEAGUE_OF_LEGENDS)
+        ->addWiki(Wiki::OVERWATCH);
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends|overwatch',
@@ -95,8 +95,8 @@ it('can add a wiki', function () {
 
 it('can add a wiki with duplicates', function () {
     $builder = LiquipediaBuilder::query()
-        ->wikis(Wikis::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wikis::LEAGUE_OF_LEGENDS);
+        ->wikis(Wiki::LEAGUE_OF_LEGENDS)
+        ->addWiki(Wiki::LEAGUE_OF_LEGENDS);
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends',
@@ -105,9 +105,9 @@ it('can add a wiki with duplicates', function () {
 
 it('can add a wiki with duplicates and a string', function () {
     $builder = LiquipediaBuilder::query()
-        ->wikis(Wikis::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wikis::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wikis::OVERWATCH)
+        ->wikis(Wiki::LEAGUE_OF_LEGENDS)
+        ->addWiki(Wiki::LEAGUE_OF_LEGENDS)
+        ->addWiki(Wiki::OVERWATCH)
         ->addWiki('overwatch');
 
     expect($builder->build())->toBe([
@@ -146,23 +146,23 @@ it('can set a limit and an offset', function () {
 
 it('can set an endpoint', function () {
     $builder = LiquipediaBuilder::query()
-        ->endpoint(Endpoints::MATCHES);
+        ->endpoint(Endpoint::MATCHES);
 
-    expect($builder->getEndpoint())->toBe(Endpoints::MATCHES);
+    expect($builder->getEndpoint())->toBe(Endpoint::MATCHES);
 });
 
 it('can set an endpoint and a wiki', function () {
 
     $builder = LiquipediaBuilder::query()
-        ->endpoint(Endpoints::MATCHES)
-        ->wikis(Wikis::LEAGUE_OF_LEGENDS);
+        ->endpoint(Endpoint::MATCHES)
+        ->wikis(Wiki::LEAGUE_OF_LEGENDS);
 
     expect($builder->build())
         ->toBe([
             'wiki' => 'leagueoflegends',
         ])
         ->and($builder->getEndpoint())
-        ->toBe(Endpoints::MATCHES);
+        ->toBe(Endpoint::MATCHES);
 
 });
 
@@ -365,7 +365,7 @@ it('cannot set 2 raw conditions', function () {
 it('can build a complex query', function ($wiki) {
     $builder = LiquipediaBuilder::query()
         ->wikis($wiki)
-        ->endpoint(Endpoints::MATCHES)
+        ->endpoint(Endpoint::MATCHES)
         ->limit(1)
         ->offset(1)
         ->select([
@@ -390,6 +390,6 @@ it('can build a complex query', function ($wiki) {
         'date' => '2020-01-01',
     ]);
 })->with([
-    Wikis::LEAGUE_OF_LEGENDS,
-    Wikis::OVERWATCH,
+    Wiki::LEAGUE_OF_LEGENDS,
+    Wiki::OVERWATCH,
 ]);

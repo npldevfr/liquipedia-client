@@ -4,7 +4,7 @@ namespace Npldevfr\Liquipedia;
 
 use Exception;
 use Npldevfr\Liquipedia\Interfaces\ConditionsBuilderInterface;
-use Npldevfr\Liquipedia\Meta\Conditions;
+use Npldevfr\Liquipedia\Meta\Operator;
 
 final class ConditionsBuilder implements ConditionsBuilderInterface
 {
@@ -38,7 +38,7 @@ final class ConditionsBuilder implements ConditionsBuilderInterface
      */
     private static function ensureValidOperator(string $operator): void
     {
-        $isValid = in_array($operator, Conditions::all());
+        $isValid = in_array($operator, Operator::all());
 
         if (! $isValid) {
             throw new Exception('[LiquipediaBuilder] Operator '.$operator.' is not valid.');

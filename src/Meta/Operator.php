@@ -4,7 +4,7 @@ namespace Npldevfr\Liquipedia\Meta;
 
 use Npldevfr\Liquipedia\Traits\HasConstants;
 
-final class Conditions
+final class Operator
 {
     use HasConstants;
 
