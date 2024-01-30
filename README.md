@@ -14,7 +14,7 @@ Liquipedia PHP Client
 An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a> API.
 <p>
 
-<p align="center">
+<div align="center">
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/npldevfr/liquipedia-client.svg?style=flat-square)](https://packagist.org/packages/npldevfr/liquipedia-client)
 [![Tests](https://img.shields.io/github/actions/workflow/status/npldevfr/liquipedia-client/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/npldevfr/liquipedia-client/actions/workflows/run-tests.yml)
