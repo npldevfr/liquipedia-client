@@ -6,12 +6,13 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
+use Npldevfr\Liquipedia\Interfaces\LiquipediaBuilderInterface;
 use Npldevfr\Liquipedia\Meta\Endpoint;
 use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
 
-final class LiquipediaBuilder extends QueryBuilder
+final class LiquipediaBuilder extends QueryBuilder implements LiquipediaBuilderInterface
 {
     private string $endpoint;
 
@@ -25,13 +26,6 @@ final class LiquipediaBuilder extends QueryBuilder
         parent::__construct($params, $queryParameters, $client);
     }
 
-    /**
-     * @param  array<string>  $params
-     */
-    public static function query(array $params = [], ?QueryParameters $queryParameters = null, ?Client $client = null): self
-    {
-        return new self($params, $queryParameters, $client);
-    }
 
     /**
      * Set the wikis you want to query. You can pass an array of wikis or a string.
@@ -266,7 +260,6 @@ final class LiquipediaBuilder extends QueryBuilder
     public function get(?string $endpoint = null): array
     {
 
-        dd($this->client->getConfig());
 
         $customEndpoint = $endpoint ?? $this->endpoint;
         $response = json_decode($this->client->get($customEndpoint, [
@@ -276,6 +269,7 @@ final class LiquipediaBuilder extends QueryBuilder
         if (isset($response->error)) {
             throw new Exception($response->error);
         }
+
 
         //        $this->queryParameters = new QueryParameters();
         return $response->result ?? [];

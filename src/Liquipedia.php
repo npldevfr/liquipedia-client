@@ -16,7 +16,7 @@ final class Liquipedia
         ?LiquipediaBuilder $builder = null
     ) {
 
-        if ($apiKey === '' || $apiKey === '0') {
+        if ($apiKey === ''){
             throw new \InvalidArgumentException('[Liquipedia] Api key is required');
         }
 
@@ -35,7 +35,6 @@ final class Liquipedia
 
     public function query(array $params = [], ?QueryParameters $queryParameters = null, ?Client $client = null): LiquipediaBuilder
     {
-
-        return (new self($this->apiKey))->builder->query($params, $queryParameters, $client);
+        return (new self($this->apiKey))->builder;
     }
 }
