@@ -7,4 +7,5 @@
 /vendor/
 *.swp
 *.swo
+node_modules/
 .idea

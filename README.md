@@ -1,5 +1,3 @@
-
-
 <br />
 
 <p align="center">
@@ -21,9 +19,8 @@ An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a>
 [![Total Downloads](https://img.shields.io/packagist/dt/npldevfr/liquipedia-client.svg?style=flat-square)](https://packagist.org/packages/npldevfr/liquipedia-client)
 </div>
 
-
-
 ## ✨ Features
+
 👌&nbsp; Easy to use<br>
 🔥&nbsp; Supports all Liquipedia API endpoints<br>
 🔨&nbsp; Custom query builder<br>
@@ -31,9 +28,8 @@ An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a>
 📚&nbsp; Well documented<br>
 🧪&nbsp; Tested<br>
 
-
-
 ## 📦 Installation
+
 Supports PHP >= 8.2
 
 ```bash
@@ -41,11 +37,28 @@ composer require npldevfr/liquipedia-client
 ```
 
 ## 🚀 Usage
+
 ```php
-// todo
+use Npldevfr\Liquipedia\ConditionsBuilder;
+use Npldevfr\Liquipedia\Liquipedia;
+use Npldevfr\Liquipedia\Meta\Endpoint;
+use Npldevfr\Liquipedia\Meta\Wiki;
+
+$liquipediaSdk = new Liquipedia('your-api-key');
+
+// Get the last 10 matches of Team Liquid
+$matches = $liquipediaSdk->query()
+        ->endpoint(Endpoint::MATCHES)
+        ->wikis(Wiki::LEAGUE_OF_LEGENDS)
+        ->rawConditions('[[opponent::Team Liquid]]')
+        ->limit(10)
+        ->orderBy('date', 'desc')
+        ->get()
+    );
 ```
 
 ## 🛠️ Development
+
 ```bash
 git clone https://github.com/npldevfr/liquipedia-client
 composer install
