@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: "LiquipediaClient"
-  text: "The Liquipedia PHP Client documentation"
-  tagline: My great project tagline
+  text: ""
+  tagline: "The Liquipedia PHP Client documentation"
   actions:
     - theme: brand
       text: Markdown Examples
