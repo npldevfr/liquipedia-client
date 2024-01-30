@@ -7,7 +7,8 @@ if [ $# -eq 0 ]; then
 fi
 
 # Get the current version from your composer.json
-currentVersion=$(jq -r .version composer.json)
+composerJson="./composer.json"
+currentVersion=$(jq -r .version "$composerJson")
 
 # Function to increment the version in the format 0.0.0
 incrementVersion() {
@@ -28,13 +29,16 @@ incrementVersion() {
 
 # Use the provided version or increment the current version
 if [[ $1 =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    newVersion="v$1"
+    newVersion="$1"
 else
-    newVersion="v$(incrementVersion "$currentVersion")"
+    newVersion="$(incrementVersion "$currentVersion")"
 fi
 
+# Update the version in composer.json
+jq ".version = \"$newVersion\"" "$composerJson" > "$composerJson.tmp" && mv "$composerJson.tmp" "$composerJson"
+
 # Display the new version
-echo "Creating a new release for $(jq -r .name composer.json)..."
+echo "Creating a new release for $(jq -r .name "$composerJson")..."
 echo "Current version: $currentVersion"
 echo "New version: $newVersion"
 
