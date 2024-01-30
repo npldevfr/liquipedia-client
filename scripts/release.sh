@@ -28,9 +28,9 @@ incrementVersion() {
 
 # Use the provided version or increment the current version
 if [[ $1 =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    newVersion=$1
+    newVersion="v$1"
 else
-    newVersion=$(incrementVersion "$currentVersion")
+    newVersion="v$(incrementVersion "$currentVersion")"
 fi
 
 # Display the new version
@@ -39,9 +39,9 @@ echo "Current version: $currentVersion"
 echo "New version: $newVersion"
 
 # Create the tag
-git tag "v$newVersion"
+git tag "$newVersion"
 
 # Push the tag to the remote repository
-git push origin "v$newVersion"
+git push origin "$newVersion"
 
 echo "Release created successfully."
