@@ -28,14 +28,18 @@ export default defineConfig({
                     {text: 'Getting Started', link: '/guide/getting-started'},
                 ]
             },
-            {
-                text: 'Endpoints (Coming Soon)',
-                items: []
-            },
+
             {
                 text: 'Query Builder',
                 items: [
                     {text: 'Methods', link: '/query-builder/methods'},
+                ]
+            },
+            {
+                text: 'API',
+                items: [
+                    {text: 'Endpoints', link: '/api/endpoints'},
+                    {text: 'Wiki', link: '/api/wikis'},
                 ]
             }
         ],

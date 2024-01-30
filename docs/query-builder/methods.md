@@ -2,58 +2,58 @@
 
 The `LiquipediaBuilderInterface` is an interface that defines methods for building queries to interact with Liquipedia data.
 
-## Methods
+# Methods
 
-### 1. `wikis($wikis): self`
+## 1. `wikis($wikis): self`
 
 Set the wikis you want to query.
 
 - **Parameters:**
     - `$wikis`: An array of strings or a single string representing the wikis to query.
 
-### 2. `endpoint($endpoint): self`
+## 2. `endpoint($endpoint): self`
 
 Set the endpoint you want to query.
 
 - **Parameters:**
     - `$endpoint`: A string representing the endpoint to query.
 
-### 3. `rawConditions($conditions): self`
+## 3. `rawConditions($conditions): self`
 
 Set the conditions you want to query.
 
 - **Parameters:**
     - `$conditions`: A string representing the raw conditions for the query.
 
-### 4. `limit($limit): self`
+## 4. `limit($limit): self`
 
 Limit the number of results.
 
 - **Parameters:**
     - `$limit`: An integer representing the maximum number of results to retrieve.
 
-### 5. `get(): array`
+## 5. `get(): array`
 
 Retrieve the query results.
 
 - **Returns:**
     - An array containing the query results.
 
-### 6. `addWiki($wikis): self`
+## 6. `addWiki($wikis): self`
 
 Add a wiki to the wikis you want to query.
 
 - **Parameters:**
     - `$wikis`: A string representing the wiki to add to the query.
 
-### 7. `offset($offset): self`
+## 7. `offset($offset): self`
 
 Set a result offset.
 
 - **Parameters:**
     - `$offset`: An integer representing the offset for results.
 
-### 8. `orderBy($orderBy): self`
+## 8. `orderBy($orderBy): self`
 
 Order the results.
 
