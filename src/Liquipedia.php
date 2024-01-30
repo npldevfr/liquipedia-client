@@ -3,7 +3,6 @@
 namespace Npldevfr\Liquipedia;
 
 use GuzzleHttp\Client;
-use Npldevfr\Liquipedia\Query\QueryParameters;
 
 final class Liquipedia
 {
@@ -16,7 +15,7 @@ final class Liquipedia
         ?LiquipediaBuilder $builder = null
     ) {
 
-        if ($apiKey === ''){
+        if ($apiKey === '') {
             throw new \InvalidArgumentException('[Liquipedia] Api key is required');
         }
 
@@ -33,7 +32,7 @@ final class Liquipedia
 
     }
 
-    public function query(array $params = [], ?QueryParameters $queryParameters = null, ?Client $client = null): LiquipediaBuilder
+    public function query(): LiquipediaBuilder
     {
         return (new self($this->apiKey))->builder;
     }

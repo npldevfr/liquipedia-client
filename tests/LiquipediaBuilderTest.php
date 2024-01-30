@@ -5,11 +5,9 @@ use Npldevfr\Liquipedia\LiquipediaBuilder;
 use Npldevfr\Liquipedia\Meta\Endpoint;
 use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Meta\Wiki;
-use Npldevfr\Liquipedia\Query\QueryParameters;
-
 
 it('can set one wiki', function () {
-    $builder =(new LiquipediaBuilder())->wikis(Wiki::LEAGUE_OF_LEGENDS);
+    $builder = (new LiquipediaBuilder())->wikis(Wiki::LEAGUE_OF_LEGENDS);
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends',
@@ -17,7 +15,7 @@ it('can set one wiki', function () {
 });
 
 it('can set multiple wikis', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis([
             Wiki::LEAGUE_OF_LEGENDS,
             Wiki::OVERWATCH,
@@ -29,7 +27,7 @@ it('can set multiple wikis', function () {
 });
 
 it('can set multiple wikis with duplicates', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis([
             Wiki::LEAGUE_OF_LEGENDS,
             Wiki::LEAGUE_OF_LEGENDS,
@@ -41,7 +39,7 @@ it('can set multiple wikis with duplicates', function () {
 });
 
 it('can set multiple wikis with duplicates and a string', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis([
             Wiki::LEAGUE_OF_LEGENDS,
             'overwatch',
@@ -53,7 +51,7 @@ it('can set multiple wikis with duplicates and a string', function () {
 });
 
 it('can add a wiki', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis(Wiki::LEAGUE_OF_LEGENDS)
         ->addWiki(Wiki::OVERWATCH);
 
@@ -63,7 +61,7 @@ it('can add a wiki', function () {
 });
 
 it('can add a wiki with duplicates', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis(Wiki::LEAGUE_OF_LEGENDS)
         ->addWiki(Wiki::LEAGUE_OF_LEGENDS);
 
@@ -73,7 +71,7 @@ it('can add a wiki with duplicates', function () {
 });
 
 it('can add a wiki with duplicates and a string', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis(Wiki::LEAGUE_OF_LEGENDS)
         ->addWiki(Wiki::LEAGUE_OF_LEGENDS)
         ->addWiki(Wiki::OVERWATCH)
@@ -85,7 +83,7 @@ it('can add a wiki with duplicates and a string', function () {
 });
 
 it('can set a limit', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->limit(1);
 
     expect($builder->build())->toBe([
@@ -94,7 +92,7 @@ it('can set a limit', function () {
 });
 
 it('can set an offset', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->offset(1);
 
     expect($builder->build())->toBe([
@@ -103,7 +101,7 @@ it('can set an offset', function () {
 });
 
 it('can set a limit and an offset', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->limit(1)
         ->offset(1);
 
@@ -114,7 +112,7 @@ it('can set a limit and an offset', function () {
 });
 
 it('can set an endpoint', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->endpoint(Endpoint::MATCHES);
 
     expect($builder->getEndpoint())->toBe(Endpoint::MATCHES);
@@ -122,7 +120,7 @@ it('can set an endpoint', function () {
 
 it('can set an endpoint and a wiki', function () {
 
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->endpoint(Endpoint::MATCHES)
         ->wikis(Wiki::LEAGUE_OF_LEGENDS);
 
@@ -136,7 +134,7 @@ it('can set an endpoint and a wiki', function () {
 });
 
 it('can select only some fields', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->select([
             'field1',
             'field2',
@@ -148,7 +146,7 @@ it('can select only some fields', function () {
 });
 
 it('can select only some fields with a string', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->select('field1, field2,field3');
 
     expect($builder->build())->toBe([
@@ -157,7 +155,7 @@ it('can select only some fields with a string', function () {
 });
 
 it('can select only some fields with a string and an array', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->select([
             'field1',
             'field2',
@@ -170,7 +168,7 @@ it('can select only some fields with a string and an array', function () {
 });
 
 it('can select only some fields with a string and an array with duplicates', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->select([
             'field1',
             'field2',
@@ -184,7 +182,7 @@ it('can select only some fields with a string and an array with duplicates', fun
 });
 
 it('can use pagination', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->pagination(1);
 
     expect($builder->build())->toBe([
@@ -194,7 +192,7 @@ it('can use pagination', function () {
 });
 
 it('can use pagination with a string', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->pagination('1');
 
     expect($builder->build())->toBe([
@@ -204,7 +202,7 @@ it('can use pagination with a string', function () {
 });
 
 it('can use pagination with a string and an int', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->pagination('1')
         ->pagination(2);
 
@@ -215,7 +213,7 @@ it('can use pagination with a string and an int', function () {
 });
 
 it('can order by a field', function ($order) {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->orderBy('field1', $order);
 
     expect($builder->build())->toBe([
@@ -225,13 +223,13 @@ it('can order by a field', function ($order) {
 
 it('cannot order by a field with an invalid order', function () {
     expect(
-        fn () =>(new LiquipediaBuilder())
+        fn () => (new LiquipediaBuilder())
             ->orderBy('field1', 'invalid')
     )->toThrow(Exception::class);
 });
 
 it('can order by a field with a string', function ($order) {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->orderBy('field1', $order)
         ->orderBy('field2', 'asc');
 
@@ -241,7 +239,7 @@ it('can order by a field with a string', function ($order) {
 })->with(SortOrder::all());
 
 it('can group by a field', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->groupBy('field1');
 
     expect($builder->build())->toBe([
@@ -250,7 +248,7 @@ it('can group by a field', function () {
 });
 
 it('can group by a field with a string', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->groupBy('field1', 'DESC');
 
     expect($builder->build())->toBe([
@@ -259,7 +257,7 @@ it('can group by a field with a string', function () {
 });
 
 it('can group by a field with a string and an array', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->groupBy('field1', 'DESC')
         ->groupBy('field2', 'ASC');
 
@@ -269,7 +267,7 @@ it('can group by a field with a string and an array', function () {
 });
 
 it('can group by a field with a string and an array with duplicates', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->groupBy('field1', 'DESC')
         ->groupBy('field2', 'ASC')
         ->groupBy('field2', 'ASC');
@@ -280,7 +278,7 @@ it('can group by a field with a string and an array with duplicates', function (
 });
 
 it('can set template', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->template('template1');
 
     expect($builder->build())->toBe([
@@ -289,7 +287,7 @@ it('can set template', function () {
 });
 
 it('can add date', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->date('2020-01-01');
 
     expect($builder->build())->toBe([
@@ -299,13 +297,13 @@ it('can add date', function () {
 
 it('cannot add date with wrong format', function () {
     expect(
-        fn () =>(new LiquipediaBuilder())
+        fn () => (new LiquipediaBuilder())
             ->date('2020-01-01 00:00:00')
     )->toThrow(Exception::class);
 });
 
 it('can add date with a string', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->date('2020-01-01')
         ->date('2020-01-02');
 
@@ -315,7 +313,7 @@ it('can add date with a string', function () {
 });
 
 it('can set raw conditions', function () {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->rawConditions('[[pagename::value]]');
 
     expect($builder->build())->toBe([
@@ -325,14 +323,14 @@ it('can set raw conditions', function () {
 
 it('cannot set 2 raw conditions', function () {
     expect(
-        fn () =>(new LiquipediaBuilder())
+        fn () => (new LiquipediaBuilder())
             ->rawConditions('[[pagename::value]]')
             ->rawConditions('[[pagename::value]]')
     )->toThrow(Exception::class);
 });
 
 it('can build a complex query', function ($wiki) {
-    $builder =(new LiquipediaBuilder())
+    $builder = (new LiquipediaBuilder())
         ->wikis($wiki)
         ->endpoint(Endpoint::MATCHES)
         ->limit(1)
