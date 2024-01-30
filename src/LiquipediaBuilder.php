@@ -4,8 +4,9 @@ namespace Npldevfr\Liquipedia;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 use Npldevfr\Liquipedia\Meta\Endpoint;
-use Npldevfr\Liquipedia\Meta\Operator;
 use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
@@ -19,20 +20,17 @@ final class LiquipediaBuilder extends QueryBuilder
     public function __construct(
         ?array $params = [],
         ?QueryParameters $queryParameters = null,
-        ?Client $client = null
+        ?Client $client = new Client()
     ) {
-
-        parent::__construct($params, $queryParameters, $client ?? new Client([
-            'base_uri' => 'https://api.liquipedia.net/api/v3',
-        ]));
+        parent::__construct($params, $queryParameters, $client);
     }
 
     /**
      * @param  array<string>  $params
      */
-    public static function query(array $params = [], ?QueryParameters $queryParameters = null): self
+    public static function query(array $params = [], ?QueryParameters $queryParameters = null, ?Client $client = null): self
     {
-        return new self($params, $queryParameters);
+        return new self($params, $queryParameters, $client);
     }
 
     /**
@@ -260,6 +258,28 @@ final class LiquipediaBuilder extends QueryBuilder
         );
     }
 
+    /**
+     * @return array<string>
+     *
+     * @throws JsonException | Exception | GuzzleException
+     */
+    public function get(?string $endpoint = null): array
+    {
+
+        dd($this->client->getConfig());
+
+        $customEndpoint = $endpoint ?? $this->endpoint;
+        $response = json_decode($this->client->get($customEndpoint, [
+            'query' => $this->queryParameters->toArray(),
+        ])->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
+
+        if (isset($response->error)) {
+            throw new Exception($response->error);
+        }
+
+        //        $this->queryParameters = new QueryParameters();
+        return $response->result ?? [];
+    }
     //    /**
     //     * @return $this
     //     */

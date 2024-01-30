@@ -1,5 +1,6 @@
 <?php
 
+use Npldevfr\Liquipedia\ConditionsBuilder;
 use Npldevfr\Liquipedia\LiquipediaBuilder;
 use Npldevfr\Liquipedia\Meta\Endpoint;
 use Npldevfr\Liquipedia\Meta\SortOrder;
@@ -376,14 +377,17 @@ it('can build a complex query', function ($wiki) {
         ->orderBy('field1', SortOrder::ASC)
         ->groupBy('field1', SortOrder::DESC)
         ->date('2020-01-01')
-        ->rawConditions('[[pagename::value]]');
+        ->rawConditions(
+            ConditionsBuilder::build('pagename', '::', 'value')
+                ->toValue()
+        );
 
     expect($builder->build())->toBe([
         'wiki' => $wiki,
         'limit' => 1,
         'offset' => 1,
         'query' => 'field1,field2',
-        'conditions' => '[[pagename::value]]',
+        'conditions' => '([[pagename::value]])',
         'order' => 'field1 ASC',
         'pagination' => 1,
         'groupby' => 'field1 DESC',
