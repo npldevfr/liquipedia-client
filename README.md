@@ -19,7 +19,7 @@ An unofficial PHP client for the <a href="https://liquipedia.net">Liquipedia</a>
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/npldevfr/liquipedia-client.svg?style=flat-square)](https://packagist.org/packages/npldevfr/liquipedia-client)
 [![Tests](https://img.shields.io/github/actions/workflow/status/npldevfr/liquipedia-client/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/npldevfr/liquipedia-client/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/npldevfr/liquipedia-client.svg?style=flat-square)](https://packagist.org/packages/npldevfr/liquipedia-client)
-</p>
+</div>
 
 
 
