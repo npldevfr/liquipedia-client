@@ -33,6 +33,7 @@ abstract class QueryBuilder implements QueryBuilderInterface
         }
 
         $this->client = $client ?? new Client();
+
     }
 
     public function build(): array

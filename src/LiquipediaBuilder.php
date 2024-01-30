@@ -4,13 +4,15 @@ namespace Npldevfr\Liquipedia;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
+use Npldevfr\Liquipedia\Interfaces\LiquipediaBuilderInterface;
 use Npldevfr\Liquipedia\Meta\Endpoint;
-use Npldevfr\Liquipedia\Meta\Operator;
 use Npldevfr\Liquipedia\Meta\SortOrder;
 use Npldevfr\Liquipedia\Query\QueryBuilder;
 use Npldevfr\Liquipedia\Query\QueryParameters;
 
-final class LiquipediaBuilder extends QueryBuilder
+final class LiquipediaBuilder extends QueryBuilder implements LiquipediaBuilderInterface
 {
     private string $endpoint;
 
@@ -19,20 +21,9 @@ final class LiquipediaBuilder extends QueryBuilder
     public function __construct(
         ?array $params = [],
         ?QueryParameters $queryParameters = null,
-        ?Client $client = null
+        ?Client $client = new Client()
     ) {
-
-        parent::__construct($params, $queryParameters, $client ?? new Client([
-            'base_uri' => 'https://api.liquipedia.net/api/v3',
-        ]));
-    }
-
-    /**
-     * @param  array<string>  $params
-     */
-    public static function query(array $params = [], ?QueryParameters $queryParameters = null): self
-    {
-        return new self($params, $queryParameters);
+        parent::__construct($params, $queryParameters, $client);
     }
 
     /**
@@ -152,7 +143,7 @@ final class LiquipediaBuilder extends QueryBuilder
      *
      * @throws Exception
      */
-    public function orderBy(string $field, string $direction = 'ASC'): self
+    public function orderBy(string $orderBy, string $direction = 'ASC'): self
     {
 
         $direction = strtoupper($direction);
@@ -161,7 +152,7 @@ final class LiquipediaBuilder extends QueryBuilder
             throw new Exception('[LiquipediaBuilder] Direction '.$direction.' is not valid.');
         }
 
-        $this->queryParameters->order = "{$field} ".$direction;
+        $this->queryParameters->order = "{$orderBy} ".$direction;
 
         return $this;
     }
@@ -260,109 +251,26 @@ final class LiquipediaBuilder extends QueryBuilder
         );
     }
 
-    //    /**
-    //     * @return $this
-    //     */
-    //    public function rawConditions(string $conditions): self
-    //    {
-    //        $this->params['conditions'] = trim($this->params['conditions'].' '.$conditions);
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @return $this
-    //     *
-    //     * @throws Exception
-    //     */
-    //    public function andCondition(string $key, string $operator, string $value): self
-    //    {
-    //        // operator are : :: (equals), ::! (not equals), ::< (lower than) or ::> (greater than).
-    //        if (! in_array($operator, ['::', '::!', '::<', '::>'])) {
-    //            throw new Exception('Operator must be ::, ::!, ::< or ::>');
-    //        }
-    //
-    //        $this->params['conditions'] = trim($this->params['conditions'].' AND '."[[{$key}{$operator}{$value}]]");
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @param  array<string>  $values
-    //     * @return $this
-    //     *
-    //     * @throws Exception
-    //     */
-    //    public function andConditions(string $key, string $operator, array $values): self
-    //    {
-    //        // operator are : :: (equals), ::! (not equals), ::< (lower than) or ::> (greater than).
-    //        if (! in_array($operator, ['::', '::!', '::<', '::>'])) {
-    //            throw new Exception('Operator must be ::, ::!, ::< or ::>');
-    //        }
-    //
-    //        $conditions = [];
-    //        foreach ($values as $value) {
-    //            $conditions[] = "[[{$key}{$operator}{$value}]]";
-    //        }
-    //
-    //        $this->params['conditions'] = trim($this->params['conditions'].' '.implode(' AND ', $conditions));
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @return $this
-    //     *
-    //     * @throws Exception
-    //     */
-    //    public function orCondition(string $key, string $operator, string $value): self
-    //    {
-    //        // operator are : :: (equals), ::! (not equals), ::< (lower than) or ::> (greater than).
-    //        if (! in_array($operator, ['::', '::!', '::<', '::>'])) {
-    //            throw new Exception('Operator must be ::, ::!, ::< or ::>');
-    //        }
-    //
-    //        $this->params['conditions'] = trim($this->params['conditions'].' OR '."[[{$key}{$operator}{$value}]]");
-    //
-    //        return $this;
-    //    }
-    //
-    //    /**
-    //     * @param  array<string>  $values
-    //     * @return $this
-    //     *
-    //     * @throws Exception
-    //     */
-    //    public function orConditions(string $key, string $operator, array $values): self
-    //    {
-    //        // operator are : :: (equals), ::! (not equals), ::< (lower than) or ::> (greater than).
-    //        if (! in_array($operator, ['::', '::!', '::<', '::>'])) {
-    //            throw new Exception('Operator must be ::, ::!, ::< or ::>');
-    //        }
-    //
-    //        $conditions = [];
-    //        foreach ($values as $value) {
-    //            $conditions[] = "[[{$key}{$operator}{$value}]]";
-    //        }
-    //
-    //        $this->params['conditions'] = trim($this->params['conditions'].' OR '.implode(' OR ', $conditions));
-    //        $this->params['conditions'] = trim(preg_replace('/^OR/', '', $this->params['conditions']));
-    //
-    //        return $this;
-    //    }
-    //
-    //    public function get(?string $endpoint = null): array
-    //    {
-    //
-    //        $customEndpoint = $endpoint ?? $this->endpoint;
-    //        $response = json_decode($this->client->get($customEndpoint, [
-    //            'query' => $this->params,
-    //        ])->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
-    //
-    //        if (isset($response->error)) {
-    //            throw new Exception($response->error);
-    //        }
-    //
-    //        return $response->result ?? [];
-    //    }
+    /**
+     * @return array<string>
+     *
+     * @throws JsonException | Exception | GuzzleException
+     */
+    public function get(?string $endpoint = null): array
+    {
+
+        $customEndpoint = $endpoint ?? $this->endpoint;
+        $response = json_decode($this->client->get($customEndpoint, [
+            'query' => $this->queryParameters->toArray(),
+        ])->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
+
+        /**
+         * @var object $response
+         */
+        if (isset($response->error)) {
+            throw new Exception($response->error);
+        }
+
+        return $response->result ?? [];
+    }
 }
