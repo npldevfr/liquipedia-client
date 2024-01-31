@@ -49,6 +49,7 @@ final class LiquipediaBuilder extends QueryBuilder implements LiquipediaBuilderI
 
     /**
      * Add a wiki to the wikis you want to query.
+     *
      * @param  string | array<string>  $wikis
      * @return $this
      */
