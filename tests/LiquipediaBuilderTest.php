@@ -53,7 +53,7 @@ it('can set multiple wikis with duplicates and a string', function () {
 it('can add a wiki', function () {
     $builder = (new LiquipediaBuilder())
         ->wikis(Wiki::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wiki::OVERWATCH);
+        ->addWikis(Wiki::OVERWATCH);
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends|overwatch',
@@ -63,7 +63,7 @@ it('can add a wiki', function () {
 it('can add a wiki with duplicates', function () {
     $builder = (new LiquipediaBuilder())
         ->wikis(Wiki::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wiki::LEAGUE_OF_LEGENDS);
+        ->addWikis(Wiki::LEAGUE_OF_LEGENDS);
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends',
@@ -73,9 +73,9 @@ it('can add a wiki with duplicates', function () {
 it('can add a wiki with duplicates and a string', function () {
     $builder = (new LiquipediaBuilder())
         ->wikis(Wiki::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wiki::LEAGUE_OF_LEGENDS)
-        ->addWiki(Wiki::OVERWATCH)
-        ->addWiki('overwatch');
+        ->addWikis(Wiki::LEAGUE_OF_LEGENDS)
+        ->addWikis(Wiki::OVERWATCH)
+        ->addWikis('overwatch');
 
     expect($builder->build())->toBe([
         'wiki' => 'leagueoflegends|overwatch',

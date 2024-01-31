@@ -49,12 +49,17 @@ final class LiquipediaBuilder extends QueryBuilder implements LiquipediaBuilderI
 
     /**
      * Add a wiki to the wikis you want to query.
-     *
+     * @param  string | array<string>  $wikis
      * @return $this
      */
-    public function addWiki(string $wiki): self
+    public function addWikis(string|array $wikis): self
     {
-        $this->queryParameters->wiki .= '|'.$wiki;
+        $this->queryParameters->wiki .= '|'.implode(
+            '|',
+            array_unique(
+                (array) $wikis
+            )
+        );
         $this->avoidWikiDuplicates();
 
         return $this;

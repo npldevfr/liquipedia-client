@@ -34,7 +34,7 @@ interface LiquipediaBuilderInterface
     /**
      * Add a wiki to the wikis you want to query.
      */
-    public function addWiki(string $wikis): self;
+    public function addWikis(string $wikis): self;
 
     /**
      * Set a result offset.

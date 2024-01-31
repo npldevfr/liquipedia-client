@@ -32,6 +32,7 @@ export default defineConfig({
             {
                 text: 'Query Builder',
                 items: [
+                    {text: 'Usage', link: '/query-builder/usage'},
                     {text: 'Methods', link: '/query-builder/methods'},
                 ]
             },
